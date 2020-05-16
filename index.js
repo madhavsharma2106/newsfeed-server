@@ -5,12 +5,16 @@ const morgan = require("morgan");
 const cors = require("cors");
 const connect = require("./utils/db");
 const { router: postRouter } = require("./resources/post/post.router");
+const { signup, signin } = require("./utils/auth");
 
 app.disable("x-powered-by");
 app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
+app.use("/signup", signup);
+app.use("/signin", signin);
 
 app.use("/api/post", postRouter);
 
